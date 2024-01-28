@@ -1,0 +1,477 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700;900&display=swap');
+
+/*RESET DO CSS*/
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', arial, sans-serif;
+}
+
+/*CLASSES GLOBAIS DO SITE*/
+body {
+    background-color: #e6edf4;
+
+    background-image: url(../../imagens/fundo.jpg);
+}
+
+::selection {
+    background: purple;
+    color: #fff;
+}
+
+::-moz-selection {
+    background: purple;
+    color: #fff;
+}
+
+.centerObject {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ocultaConteudo {
+    display: none;
+}
+
+/*SEÇÃO HEADER*/
+#container {
+    width: 1050px;
+    height: auto;
+    overflow: hidden;
+    margin-top: 10px;
+    border-radius: 25px;
+    box-shadow: 2px 5px 25px -5px rgba(0, 0, 0, 0.45);
+}
+
+#header {
+    width: 100%;
+    height: 207px;
+}
+
+#container-logo {
+    width: 100%;
+    height: 112px;
+    background-color: #1e2125;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+/*SEÇÃO MODAL*/
+
+.modalContainer {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    z-index: 999;
+    display: none;
+}
+
+.modal {
+    width: 800px;
+    height: 650px;
+    margin-top: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+.fecharModal {
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-left: 730px;
+    margin-bottom: 10px;
+    border-top-right-radius: 10px;
+    background-color: darkred;
+
+}
+
+.visualizarContatos {
+    width: 800px;
+    height: 550px;
+}
+
+.visualizarContato {
+    width: inherit;
+    height: inherit;
+}
+
+.visualizarContato tr {
+    width: 50px;
+    height: 20px;
+
+    background-color: cadetblue;
+}
+
+.visualizarContato tr td {
+    width: 50%;
+    padding: 15px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    border: solid 1px #999;
+    background-color: #999;
+}
+
+
+
+/*SEÇÃO MENU*/
+#container-menu {
+    width: 100%;
+    height: 50%;
+    background-color: gold;
+}
+
+#CMS-text {
+    width: 530px;
+    height: 70px;
+    float: left;
+    display: flex;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+#CMS-text h1 {
+    color: #f5f5f5;
+    font-size: 42px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#CMS-text p {
+    color: #f5f5f5;
+    font-size: 23px;
+    margin-top: 25px;
+    margin-left: 5px;
+}
+
+#logo {
+    width: 206px;
+    height: 100px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 65px;
+
+    background-color: azure;
+}
+
+#logo img {
+    width: 206px;
+    height: 100px;
+}
+
+/*CARDS MENU*/
+#container-cards-menu {
+    float: left;
+    width: 75%;
+    height: 95px;
+    background-color: #f5f5f5;
+}
+
+.capsula-cards {
+    width: 130px;
+    height: 95px;
+    float: left;
+    margin-left: 50px;
+    margin-right: 15px;
+    border: 2px solid #f1f1f1;
+    background-color: #F5F5F5;
+}
+
+.capsula-cards a {
+    color: #000;
+    text-decoration: none;
+}
+
+.imagem-cards-menu {
+    width: 80px;
+    height: 71px;
+    padding: 10px;
+    margin-left: 25px;
+    background-color: #b8babc;
+}
+
+.imagem-cards-menu img {
+    width: 50px;
+    height: 50px;
+    margin-left: 5px;
+}
+
+.text-cards-menu {
+    display: flex;
+    margin-top: 3px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-cards-menu a {
+
+    text-decoration: none;
+}
+
+/*SEÇÃO BOAS VINDAS*/
+#container-logout {
+    float: left;
+    width: 25%;
+    height: 95px;
+    background-color: #f5f5f5;
+}
+
+#bem-vindo {
+    width: 272px;
+    height: 50px;
+    font-size: 17px;
+    padding-left: 18px;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+
+#logout {
+    width: 50px;
+    height: 20px;
+    margin-left: 190px;
+}
+
+#logout p {
+    text-align: end;
+    margin-right: 20px;
+}
+
+/*SEÇÃO CONTEUDO*/
+#conteudo {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+#cadastro,
+#cadastroUsuarios {
+    width: 935px;
+    height: auto;
+    overflow: hidden;
+    margin-top: 55px;
+    border-radius: 5px;
+    box-shadow: 10px 5px 10px 2px #999;
+    background-color: #23272a;
+}
+
+#cadastroTitulo {
+    width: auto;
+    height: 35px;
+    font-size: 16px;
+    padding-top: 4px;
+    text-align: center;
+    background-color: yellow;
+}
+
+/*Divide em duas colunas as infromações de contato*/
+.arrumaLayoutContatos {
+    width: 48%;
+    height: 320px;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 55px;
+
+    background-color: #000;
+}
+
+.campos {
+    width: auto;
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.cadastroInformacoesPessoais {
+    width: 230px;
+    height: 55px;
+    color: #ffffff;
+    padding-top: 3%;
+    padding-left: 20px;
+    background-color: #23272a;
+}
+
+.cadastroEntradaDeDados {
+    width: 600px;
+    height: auto;
+    padding-top: 10px;
+
+    background-color: #23272a;
+}
+
+input[type=text],
+input[type=tel],
+input[type=email],
+input[type=url],
+input[type=password],
+select {
+    width: 300px;
+    height: 30px;
+    margin-left: 10px;
+    outline-color: #aa956f;
+}
+
+.cadastroEntradaDeDados textarea {
+    width: 300px;
+    height: 100px;
+    resize: none;
+    margin-left: 10px;
+    outline-color: #aa956f;
+}
+
+#formEnviar {
+    width: 100%;
+    height: 50px;
+    clear: both;
+}
+
+.enviar input {
+    width: 125px;
+    height: 40px;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10px;
+    letter-spacing: 1.5px;
+    outline-color: #aa956f;
+    background-color: orangered;
+
+
+}
+
+.enviar {
+    margin-left: 30px;
+    margin-bottom: 50px;
+}
+
+#consultaDeDados {
+    width: 940px;
+    min-height: 300px;
+    height: auto;
+    margin-top: 60px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: solid 1px #000;
+    box-shadow: 15px 2px 5px 5px #999;
+}
+
+#tblConsulta {
+    width: 100%;
+    min-height: 30px;
+    height: auto;
+}
+
+#tblTitulo {
+    width: 100%;
+    height: 35px;
+    background-color: cadetblue;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+}
+
+#tblLinhas {
+    width: 100%;
+    height: 50px;
+}
+
+.tblColunas {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    /*    border: solid 1px #000;*/
+    background-color: #999;
+}
+
+.cardsImagens {
+    width: 25%;
+    height: 50px;
+    float: left;
+    padding-top: 15px;
+    /*
+    border: 1px solid #000;
+    background-color: #b8babc;
+*/
+}
+
+.cardsImagens img {
+    width: 22px;
+    height: 22px;
+}
+
+/*Seção Usuarios*/
+
+#cadastroUsuarios {
+    width: 500px;
+}
+
+#containerUsuarios {
+    width: 500px;
+    height: 550px;
+    background-color: cadetblue;
+}
+
+.enviarUsuarios input {
+    width: 85px;
+    height: 35px;
+    border: none;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 375px;
+    border-radius: 10px;
+    letter-spacing: 1.5px;
+    outline-color: #aa956f;
+    border: 1px solid #fff;
+    background-color: orangered;
+
+}
+
+.foto {
+    width: 100px;
+    height: 80px;
+    padding-top: 5px;
+    border-radius: 10px;
+}
+
+.fotoVisualizar{
+    width: 200px;
+    height: 200px;
+}
+
+.pesquisar {
+    cursor: pointer;
+}
+
+
+
+
+
+/*SEÇÃO FOOTER*/
+#footer {
+    width: 100%;
+    height: 45px;
+    padding-top: 9px;
+    background-color: #1e2125;
+    border-top: 1px solid #f4f6f9;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#footer p {
+    color: #f1f1f1;
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: center;
+    letter-spacing: 1px;
+}
