@@ -1,5 +1,5 @@
 <?php
-$action = "../db/bd_Usuario/inserirUsuario.php";
+$action = "../db/db_users/inserirUsuario.php";
 
 //Import do arquivo de Variaveis e Constantes
 require_once('../modules/config.php');
@@ -38,7 +38,7 @@ if (isset($_GET['modo'])) {
                 elseif (strtoupper($sexo) == "M")
                     $Masculino = "checked";
 
-                $action = "../DataBase/bd_Usuario/atualizarUsuario.php";
+                $action = "../db/bd_Usuario/atualizarUsuario.php";
             }
         }
     }
@@ -56,7 +56,7 @@ if (isset($_GET['modo'])) {
 
     <link rel="icon" href="images/logo.png">
 
-    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 
@@ -70,7 +70,7 @@ if (isset($_GET['modo'])) {
         function visualizarUsuario(id) {
             $.ajax({
                 type: "POST",
-                url: "../DataBase/bd_Usuario/visualizarUsuario.php",
+                url: "../db/db_users/visualizarUsuario.php",
                 data: {
                     idUsuario: id
                 },
@@ -305,7 +305,7 @@ if (isset($_GET['modo'])) {
                                     <img src="icone/visualizar.png" alt="modal" title="Pesquisar" class="pesquisar" onclick="visualizarUsuario(<?= $rsUsuarios['idUsuario'] ?>);">
                                 </div>
                                 <div class="cardsImagens">
-                                    <a href="../DataBase/bd_Usuario/ativarDesativarUsuario.php?modo=status&id=<?= $rsUsuarios['idUsuario'] ?>&status=<?= $rsUsuarios['statusUsuario'] ?>">
+                                    <a href="../db/db_users/ativarDesativarUsuario.php?modo=status&id=<?= $rsUsuarios['idUsuario'] ?>&status=<?= $rsUsuarios['statusUsuario'] ?>">
                                         <img src="icone/<?= $rsUsuarios['statusUsuario'] ?>.png" alt="Status" title="Status" class="editar">
                                     </a>
                                 </div>

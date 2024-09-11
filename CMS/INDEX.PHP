@@ -1,58 +1,53 @@
 <?php
-$action = "../DataBase/bd_Contato/inserirContato.php";
+$action = "../db/bd_contact/inserirContato.php";
 
 //Import do arquivo de Variaveis e Constantes
-require_once('../modulos/config.php');
+require_once('../modules/config.php');
 
 //Import do arquivo de função para conectar no BD
-require_once('../DataBase/conexaoMysql.php');
+require_once('../db/mysql_connection.php');
 
 //Chama a função que estabelece a conexão com o BD
-if(!$conex = conexaoMysql())
-{ 
-    echo("<script> alert('".ERRO_CONEX_BD_MYSQL."') </script>");
+if (!$conex = mysqlConnection()) {
+    echo ("<script> alert('" . ERRO_CONEX_BD_MYSQL . "') </script>");
 }
 
-    if(isset($_GET['modo']))
-    {
-        if(strtoupper($_GET['modo']) == "CONSULTAR")
-        {
-            if(isset($_GET['id']) && $_GET['id'] != "")
-            {
-                $id = $_GET['id'];
+if (isset($_GET['modo'])) {
+    if (strtoupper($_GET['modo']) == "CONSULTAR") {
+        if (isset($_GET['id']) && $_GET['id'] != "") {
+            $id = $_GET['id'];
 
-                session_start();
+            session_start();
 
-                $_SESSION['id'] = $id;
+            $_SESSION['id'] = $id;
 
-                $sql = "select * from tblcontatos where idContato = ".$id;
+            $sql = "select * from tblcontacts where idContact = " . $id;
 
-                    $select = mysqli_query($conex, $sql);
+            $select = mysqli_query($conex, $sql);
 
-                if($rsContatos = mysqli_fetch_assoc($select))
-                {
-                    $nome = $rsContatos['nome'];
-                    $telefone = $rsContatos['telefone'];
-                    $celular = $rsContatos['celular'];
-                    $email = $rsContatos['email'];
-                    $linkFacebook = $rsContatos['facebook'];
-                    $sugestaoCritica = $rsContatos['critica'];   
-                    $mensagem = $rsContatos['mensagem'];
-                    $profissao = $rsContatos['profissao'];
-                    $homePage = $rsContatos['homePage'];
-                    $sexo = $rsContatos['sexo'];
+            if ($rsContacts = mysqli_fetch_assoc($select)) {
+                $nome = $rsContacts['name'];
+                $telefone = $rsContacts['telephone'];
+                $celular = $rsContacts['cellphone'];
+                $email = $rsContacts['email'];
+                $linkFacebook = $rsContacts['facebook'];
+                $sugestaoCritica = $rsContacts['suggestion'];
+                $message = $rsContacts['message'];
+                $profession = $rsContacts['profession'];
+                $homePage = $rsContacts['homePage'];
+                $gender = $rsContacts['gender'];
 
-                    if(strtoupper($sexo) == "M")
-                        $chkMan = "checked";
-                    elseif(strtoupper($sexo) == "F")
-                        $chkGirl = "checked";
+                if (strtoupper($gender) == "M")
+                    $chkMan = "checked";
+                elseif (strtoupper($gender) == "F")
+                    $chkGirl = "checked";
 
-                    $action = "../DataBase/bd_Contato/atualizarContato.php";    
-                }
+                $action = "../db/db_contact/updateContact.php";
             }
-        }        
+        }
     }
-     
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -61,33 +56,32 @@ if(!$conex = conexaoMysql())
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMS do Site</title>
+    <title>CMS - Blinding Light Store</title>
 
-    <link rel="icon" href="imagens/Logo.png">
-
-    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 
     <script>
-        $(document).ready(function(){                
-                $(".pesquisar").click(function(){
-                   $(".modalContainer").fadeIn(3000);
-                });             
+        $(document).ready(function() {
+            $(".pesquisar").click(function() {
+                $(".modalContainer").fadeIn(3000);
             });
+        });
 
-        function visualizarContato(id) 
-        {
+        function visualizarContato(id) {
             $.ajax({
                 type: "POST",
-                url: "../DataBase/bd_Contato/visualizarContato.php",
-                data: {idContato: id},
+                url: "../db/db_contact/viewContact.php",
+                data: {
+                    idContact: id
+                },
                 success: function(dados) {
                     $(".modal").html(dados);
                 }
             });
         }
-
     </script>
 
 </head>
@@ -99,31 +93,29 @@ if(!$conex = conexaoMysql())
         <div class="modal">
 
         </div>
-    </div>    
+    </div>
     <div id="container" class="centerObject">
         <header id="header">
             <div id="container-logo">
                 <div id="CMS-text">
                     <h1>CMS</h1>
-                    <p>- Sistema de Gerenciamento do Site</p>
+                    <p>- Sistema de Gerenciamento - Blinding Light Store</p>
                 </div>
 
                 <div id="logo">
-                    <img src="imagens/Logo.png">
+                    <img src="images/logo.png">
                 </div>
-
             </div>
 
             <!--SEÇÃO MENU-->
             <nav id=" container-menu">
-
                 <!--SEÇÃO CARDS MENU-->
                 <div id="container-cards-menu">
 
                     <div class="capsula-cards">
                         <a href="#">
                             <div class="imagem-cards-menu">
-                                <img src="icone/conteudo.png">
+                                <img src="icons/content.png">
                             </div>
                             <div class="text-cards-menu">
                                 <p>Adm. Conteúdo</p>
@@ -134,7 +126,7 @@ if(!$conex = conexaoMysql())
                     <div class="capsula-cards">
                         <a href="index.php">
                             <div class="imagem-cards-menu">
-                                <img src="icone/icon_fale-conosco.png">
+                                <img src="icons/talk-to-us.png">
                             </div>
                             <div class="text-cards-menu">
                                 <p>Adm. Fale Conosco</p>
@@ -146,7 +138,7 @@ if(!$conex = conexaoMysql())
                     <div class="capsula-cards">
                         <a href="nossasLojas.php">
                             <div class="imagem-cards-menu">
-                                <img src="icone/protudos.png">
+                                <img src="icons/product.png">
                             </div>
                             <div class="text-cards-menu">
                                 <p>Adm. Produtos</p>
@@ -156,9 +148,9 @@ if(!$conex = conexaoMysql())
 
 
                     <div class="capsula-cards">
-                        <a href="usuarios.php">
+                        <a href="user.php">
                             <div class="imagem-cards-menu">
-                                <img src="icone/usuario.png">
+                                <img src="icons/user.png">
                             </div>
                             <div class="text-cards-menu">
                                 <p>Adm. Usuários</p>
@@ -181,7 +173,6 @@ if(!$conex = conexaoMysql())
 
         <!--SEÇÃO CONTEUDO-->
         <section id="conteudo">
-
             <!--Seção Fale Conosco-->
             <div id="aba_contatos">
                 <div id="cadastro" class="centerObject">
@@ -190,7 +181,7 @@ if(!$conex = conexaoMysql())
                     </div>
                     <div id="cadastroInformacoes">
 
-                        <form action="<?=$action?>" name="frmCadastro" method="post">
+                        <form action="<?= $action ?>" name="frmCadastro" method="post">
 
                             <div class="arrumaLayoutContatos">
 
@@ -199,7 +190,7 @@ if(!$conex = conexaoMysql())
                                         <p> Nome: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <input type="text" name="txtNome" value="<?=@$nome?>" placeholder="Digite seu Nome" required pattern="[a-z A-Z é]*">
+                                        <input type="text" name="txtNome" value="<?= @$nome ?>" placeholder="Digite seu Nome" required pattern="[a-z A-Z é]*">
                                     </div>
                                 </div>
                                 <div class="campos">
@@ -207,7 +198,7 @@ if(!$conex = conexaoMysql())
                                         <p> Telefone: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <input type="tel" name="txtTelefone" value="<?=@$telefone?>" pattern="[(][0-9]{2}[)][0-9]{4}-[0-9]{4}" placeholder="(44)4444-4444">
+                                        <input type="tel" name="txtTelefone" value="<?= @$telefone ?>" pattern="[(][0-9]{2}[)][0-9]{4}-[0-9]{4}" placeholder="(44)4444-4444">
                                     </div>
                                 </div>
                                 <div class="campos">
@@ -215,7 +206,7 @@ if(!$conex = conexaoMysql())
                                         <p> Celular: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <input type="tel" name="txtCelular" value="<?=@$celular?>" pattern="[(][0-9]{2}[)][0-9]{5}-[0-9]{4}" placeholder="(99)99999-9999">
+                                        <input type="tel" name="txtCelular" value="<?= @$celular ?>" pattern="[(][0-9]{2}[)][0-9]{5}-[0-9]{4}" placeholder="(99)99999-9999">
                                     </div>
                                 </div>
                                 <div class="campos">
@@ -223,7 +214,7 @@ if(!$conex = conexaoMysql())
                                         <p> Email: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <input type="email" name="txtEmail" value="<?=@$email?>" placeholder="Digite seu E-mail">
+                                        <input type="email" name="txtEmail" value="<?= @$email ?>" placeholder="Digite seu E-mail">
                                     </div>
                                 </div>
                                 <div class="campos">
@@ -231,7 +222,7 @@ if(!$conex = conexaoMysql())
                                         <p> Link do Facebook: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <input name="urlFacebook" type="url" value="<?=@$linkFacebook?>" placeholder="Link do Facebook caso possua">
+                                        <input name="urlFacebook" type="url" value="<?= @$linkFacebook ?>" placeholder="Link do Facebook caso possua">
                                     </div>
                                 </div>
 
@@ -244,15 +235,16 @@ if(!$conex = conexaoMysql())
                                         <p> Home Page: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <input name="urlHomePage" type="url" placeholder="página pessoal caso possua" value="<?=@$homePage?>">
+                                        <input name="urlHomePage" type="url" placeholder="página pessoal caso possua" value="<?= @$homePage ?>">
                                     </div>
                                 </div>
+
                                 <div class="campos">
                                     <div class="cadastroInformacoesPessoais">
                                         <p> Profissão: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <input type="text" name="txtProfissao" value="<?=@$profissao?>" placeholder="Digite sua Profissão" required pattern="[a-z A-Z é]*">
+                                        <input type="text" name="txtProfissao" value="<?= @$profession ?>" placeholder="Digite sua Profissão" required pattern="[a-z A-Z é]*">
                                     </div>
                                 </div>
 
@@ -261,8 +253,8 @@ if(!$conex = conexaoMysql())
                                         <p> Sexo: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <input type="radio" name="rdoSexo" required value="F" <?=@$chkGirl?>>Feminino.
-                                        <input type="radio" name="rdoSexo" value="M" <?=@$chkMan?>>Masculino.
+                                        <input type="radio" name="rdoSexo" required value="F" <?= @$chkGirl ?>>Feminino.
+                                        <input type="radio" name="rdoSexo" value="M" <?= @$chkMan ?>>Masculino.
                                     </div>
                                 </div>
                                 <div class="campos">
@@ -283,7 +275,7 @@ if(!$conex = conexaoMysql())
                                         <p> Mensagem: </p>
                                     </div>
                                     <div class="cadastroEntradaDeDados">
-                                        <textarea name="txtMensagem" cols="50" rows="7" required placeholder="Mensagem..."><?=@$mensagem?></textarea>
+                                        <textarea name="txtMensagem" cols="50" rows="7" required placeholder="Mensagem..."><?= @$message ?></textarea>
                                     </div>
                                 </div>
 
@@ -291,20 +283,16 @@ if(!$conex = conexaoMysql())
                             <div id="formEnviar">
                                 <div class="enviar">
                                     <?php
-                                       if(isset($_GET['modo']) && strtoupper($_GET['modo'])=="CONSULTAR")
-                                       {
+                                    if (isset($_GET['modo']) && strtoupper($_GET['modo']) == "CONSULTAR") {
                                     ?>
-                                    <input type="submit" name="btnEnviar" value="Atualizar">
+                                        <input type="submit" name="btnEnviar" value="Atualizar">
                                     <?php
-                                       }
-                                       else
-                                       {
+                                    } else {
                                     ?>
-                                    <input type="submit" name="btnEnviar" value="Salvar">
+                                        <input type="submit" name="btnEnviar" value="Salvar">
                                     <?php
-                                       }
+                                    }
                                     ?>
-
 
                                 </div>
                             </div>
@@ -328,46 +316,43 @@ if(!$conex = conexaoMysql())
                         </tr>
 
                         <?php
-    
-                        $sql = "select * from tblcontatos order by tblcontatos.idContato desc";
-    
-//                        $sql = " select tblcontatos.idContato, tblcontatos.nome, tblcontatos.celular, tblcontatos.email, tblcontatos.profissao, tblcontatos.statusContato"
-                    
+
+                        $sql = "select * from tblcontacts order by tblcontacts.idContact desc";
+                        //$sql = " select tblcontatos.idContact, tblcontatos.nome, tblcontatos.celular, tblcontatos.email, tblcontatos.profissao, tblcontatos.statusContato"
                         $select = mysqli_query($conex, $sql);
-                          
-                        while($rsContatos = mysqli_fetch_assoc($select))
-                        {                    
-                    ?>
-                        <tr id="tblLinhas">
-                            <td class="tblColunas"><?=@$rsContatos['nome']?></td>
-                            <td class="tblColunas"><?=@$rsContatos['celular']?></td>
-                            <td class="tblColunas"><?=@$rsContatos['profissao']?></td>
-                            <td class="tblColunas"><?=@$rsContatos['email']?></td>
-                            <td class="tblColunas">
-                                <div class="cardsImagens">
-                                    <a href="../DataBase/bd_Contato/excluirContato.php?modo=excluir&id=<?=$rsContatos['idContato']?>" onclick="return confirm('Deseja realmente excluir esse Registro?')">
-                                        <img src="icone/delete.png" alt="Excluir" title="Excluir" class="excluir">
-                                    </a>
-                                </div>
-                                <div class="cardsImagens">
-                                    <a href="index.php?modo=consultar&id=<?=$rsContatos['idContato']?>">
-                                        <img src="icone/edit.png" alt="Editar" title="Editar" class="editar">
-                                    </a>
-                                </div>
-                                <div class="cardsImagens">
-                                    <img src="icone/visualizar.png" alt="modal" title="Pesquisar" class="pesquisar" onclick="visualizarContato(<?=$rsContatos['idContato']?>);">
-                                </div>
-                                <div class="cardsImagens">
-                                    <a href="../DataBase/bd_Contato/ativarDesativarContato.php?modo=status&id=<?=$rsContatos['idContato']?>&status=<?=$rsContatos['statusContato']?>">
-                                        <img src="icone/<?=$rsContatos['statusContato']?>.png" alt="Status" title="Status" class="editar">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+
+                        while ($rsContacts = mysqli_fetch_assoc($select)) {
+                        ?>
+                            <tr id="tblLinhas">
+                                <td class="tblColunas"><?= @$rsContacts['name'] ?></td>
+                                <td class="tblColunas"><?= @$rsContacts['celular'] ?></td>
+                                <td class="tblColunas"><?= @$rsContacts['profissao'] ?></td>
+                                <td class="tblColunas"><?= @$rsContacts['email'] ?></td>
+                                <td class="tblColunas">
+                                    <div class="cardsImagens">
+                                        <a href="../db/bd_Contato/excluirContato.php?modo=excluir&id=<?= $rsContacts['idContact'] ?>" onclick="return confirm('Deseja realmente excluir esse Registro?')">
+                                            <img src="icons/delete.png" alt="Excluir" title="Excluir" class="excluir">
+                                        </a>
+                                    </div>
+                                    <div class="cardsImagens">
+                                        <a href="index.php?modo=consultar&id=<?= $rsContacts['idContact'] ?>">
+                                            <img src="icons/edit.png" alt="Editar" title="Editar" class="editar">
+                                        </a>
+                                    </div>
+                                    <div class="cardsImagens">
+                                        <img src="icons/view.png" alt="modal" title="Pesquisar" class="pesquisar" onclick="visualizarContato(<?= $rsContacts['idContact'] ?>);">
+                                    </div>
+                                    <div class="cardsImagens">
+                                        <a href="../db/db_contact/ativarDesativarContato.php?modo=status&id=<?= $rsContacts['idContact'] ?>&status=<?= $rsContacts['statusContact'] ?>">
+                                            <img src="icons/<?= $rsContacts['statusContact'] ?>.png" alt="Status" title="Status" class="editar">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
 
                         <?php
                         }
-                    ?>
+                        ?>
 
                     </table>
                 </div>

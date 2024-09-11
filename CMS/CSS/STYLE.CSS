@@ -12,8 +12,7 @@
 /*CLASSES GLOBAIS DO SITE*/
 body {
     background-color: #e6edf4;
-
-    background-image: url(../../imagens/fundo.jpg);
+    background-image: url(../../images/background.jpg);
 }
 
 ::selection {
@@ -53,7 +52,7 @@ body {
 #container-logo {
     width: 100%;
     height: 112px;
-    background-color: #1e2125;
+    background-color: #23272a;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
 }
